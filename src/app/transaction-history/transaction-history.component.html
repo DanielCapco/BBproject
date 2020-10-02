@@ -1,1 +1,7 @@
 <p>transaction-history works!</p>
+<!-- {{transactions | json}} -->
+<ul>
+  <li *ngFor="let transaction of transactions; index as i;">
+    {{transaction.merchant.name }}
+  </li>
+</ul>

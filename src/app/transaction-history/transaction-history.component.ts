@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TransactionsService } from './../services/transactions.service';
 
 @Component({
   selector: 'app-transaction-history',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TransactionHistoryComponent implements OnInit {
 
-  constructor() { }
+  transactions = {};
 
-  ngOnInit(): void {
+  constructor(
+    private transactionsService : TransactionsService 
+  ) { }
+
+  ngOnInit(){
+    this.transactionsService.getJSON().subscribe(data => {
+          this.transactions = data.data;
+          console.log('trans', this.transactions);
+      });
   }
 
 }
