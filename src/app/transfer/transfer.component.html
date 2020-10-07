@@ -1,1 +1,81 @@
-<p>transfer works!</p>
+<div class="appCard">
+  <div class="appCardTitle">
+    <div class="appCardTitleBackground">
+      Make a Transfer
+    </div>
+  </div>
+  <div class="appCardBody">
+    <div *ngIf="currentStep==='form'">
+      <form #transferForm="ngForm" (ngSubmit)="onSubmit(transferForm)">
+
+        <div class="form-group">
+          <label for="fromAccount">FROM ACCOUNT</label>
+          <input type="text" class="form-control appInput" name="fromAccount" placeholder="Free Checking(4692): ${{accountAmount}}" ngModel
+            disabled>
+        </div>
+    
+        <div class="form-group">
+          <label for="merchantName">RECIPIENT NAME</label>
+          <input type="text" class="form-control appInput" name="merchantName" id="merchantName" ngModel required #merchantName="ngModel">
+          <div *ngIf="isSubmitClicked || (merchantName.invalid && (merchantName.dirty || merchantName.touched))" class="overdraftWarning">
+            <small *ngIf="merchantName.errors.required">
+              Recipient name is required.
+            </small>
+          </div>
+        </div>
+    
+        <div class="form-group">
+          <label for="toAccount">TO ACCOUNT</label>
+          <input type="text" class="form-control appInput" name="toAccount" id="toAccount" ngModel required iban="toAccount" #toAccount="ngModel">
+          <div *ngIf="isSubmitClicked || (toAccount.invalid && (toAccount.dirty || toAccount.touched))" class="overdraftWarning">
+            <small *ngIf="toAccount.errors.required">
+              Account number is required.
+            </small>
+            <small *ngIf="toAccount.errors.ibanValid">
+              IBAN is invalid.
+            </small>
+          </div>
+        </div>
+    
+        <div class="form-group">
+          <label for="amount">AMOUNT</label>
+          <input type="number" 
+            class="form-control appInput" 
+            name="amount" 
+            id="amount"
+            placeholder="$ 0.00"
+            ngModel
+            required
+            maxValue="{{accountAmount + 500}}"
+            #amount="ngModel">
+          <div *ngIf="isSubmitClicked || (amount.invalid && (amount.dirty || amount.touched))" class="overdraftWarning">
+            <small *ngIf="amount.errors.required">
+              Amount is required.
+            </small>
+            <small *ngIf="amount.errors.maxValue">
+              Insufficient founds.
+            </small>
+            <small *ngIf="amount.errors.minValue">
+              Amount is to low.
+            </small>
+          </div>
+        </div>
+
+        <div class="text-right">
+          <button type="submit" class="btn submit-btn" [disabled]="!transferForm.form.valid">SUBMIT</button>
+        </div>
+
+      </form>
+    </div>
+    <div *ngIf="currentStep==='preview'">
+      <div class="form-group">
+        <p>You will transfer ${{formDataValues.amount}}</p>
+        <p>Recipient: {{formDataValues.merchantName}}</p>
+        <p>Account number: {{formDataValues.toAccount}}</p>
+      </div>
+      <div class="text-right">
+        <button type="button" class="btn submit-btn" (click)="onTransfer()">TRANSFER</button>
+      </div>
+    </div>
+  </div>
+</div>

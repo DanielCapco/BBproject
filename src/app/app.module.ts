@@ -1,3 +1,5 @@
+import { IbanValidator } from './transfer/ibanValidator.directive';
+import { MaxAmountValidator } from './transfer/maxAmountValidator.directive';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -6,19 +8,27 @@ import { AppComponent } from './app.component';
 import { TransferComponent } from './transfer/transfer.component';
 import { TransactionHistoryComponent } from './transaction-history/transaction-history.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
     TransferComponent,
-    TransactionHistoryComponent
+    TransactionHistoryComponent,
+    MaxAmountValidator,
+    IbanValidator
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    Ng2SearchPipeModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,1 +1,71 @@
 /* You can add global styles to this file, and also import other style files */
+
+// html, body { height: 100%; }
+body { 
+  margin: 0; 
+  font-family: Kanit, "Helvetica Neue", sans-serif;
+  background: url('/assets/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+* {
+  border-radius: 0 !important;
+}
+.appInput {
+  outline: 0;
+  border-width: 0 0 1px;
+  border-color: lightgrey;
+}
+.appInput:focus {
+  // border: 0;
+  box-shadow: none;
+  border-color: lightcoral;
+}
+.mainbar {
+  padding: 15px 0px;
+  border-bottom: orange 3px solid;
+  background-color: white;
+}
+.mainbar img {
+  margin-left: 10%;
+}
+.appCard {
+  margin-top: 40px;
+  background-color: white;
+}
+.appCardTitle {
+  color: white;
+  text-align: center;
+  background-color: #0C8397;
+  padding: 10px;
+}
+.appCardTitleBackground {
+  margin-left: 4px;
+  background-image: url('./assets/icons/arrows.png');
+  background-repeat: no-repeat;
+}
+.appCardBody {
+  padding: 10px;
+}
+.overdraftWarning {
+  color: red;
+}
+.sort {
+  margin: 0 10px;
+}
+.submit-btn {
+  color: white; 
+  background-color: orange;
+  width: 70%;
+}
+.vendorCategoryCode {
+  position: absolute; 
+  left: 0; 
+  top: 0; 
+  width: 10px; 
+  height: 100%;
+}
+.vendorImage {
+  max-width: 40px; 
+  max-height: 40px;
+  filter: grayscale(100%);
+}

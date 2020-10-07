@@ -1,7 +1,94 @@
-<p>transaction-history works!</p>
-<!-- {{transactions | json}} -->
-<ul>
-  <li *ngFor="let transaction of transactions; index as i;">
-    {{transaction.merchant.name }}
-  </li>
-</ul>
+<div class="appCard">
+  <div class="appCardTitle">
+    <div class="appCardTitleBackground">
+      Recent transactions
+    </div>
+  </div>
+  <div class="appCardBody">
+    <div class="input-group pt-3 pb-3">
+      <input type="search" class="form-control appInput" name="search" [(ngModel)]="searchText" placeholder="Search by typing...">
+      <span class="input-group-btn">
+        <span class="sort">Sort By</span>
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="sortByParam('date')">
+          DATE
+          <svg *ngIf="this.sortAscending && this.sortBy==='date'" width="1em" height="1em" viewBox="0 0 16 16"
+            class="bi bi-arrow-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z" />
+          </svg>
+          <svg *ngIf="!this.sortAscending && this.sortBy==='date'" width="1em" height="1em" viewBox="0 0 16 16"
+            class="bi bi-arrow-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" />
+          </svg>
+        </button>
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="sortByParam('beneficiary')">
+          BENEFICIARY
+          <svg *ngIf="this.sortAscending && this.sortBy==='beneficiary'" width="1em" height="1em" viewBox="0 0 16 16"
+            class="bi bi-arrow-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z" />
+          </svg>
+          <svg *ngIf="!this.sortAscending && this.sortBy==='beneficiary'" width="1em" height="1em" viewBox="0 0 16 16"
+            class="bi bi-arrow-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" />
+          </svg>
+        </button>
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="sortByParam('amount')">
+          AMOUNT
+          <svg *ngIf="this.sortAscending && this.sortBy==='amount'" width="1em" height="1em" viewBox="0 0 16 16"
+            class="bi bi-arrow-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z" />
+          </svg>
+          <svg *ngIf="!this.sortAscending && this.sortBy==='amount'" width="1em" height="1em" viewBox="0 0 16 16"
+            class="bi bi-arrow-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" />
+          </svg>
+        </button>
+      </span>
+    </div>
+
+    <ul class="list-group">
+      <li *ngFor="let transaction of transactions | filter: searchText" class="list-group-item">
+        <div class="row">
+          <div [ngStyle]="{'background': transaction.categoryCode}" class="vendorCategoryCode"></div>
+          <div class="col-2">
+            {{transaction.dates.valueDate | date: 'MMM d' }}
+          </div>
+          <div class="col-2">
+            <img *ngIf="transaction.merchant.name==='Backbase'" src="./../../assets/icons/backbase.png"
+              class="vendorImage" alt="Backbase">
+            <img *ngIf="transaction.merchant.name==='7-Eleven'" src="./../../assets/icons/7-eleven.png"
+              class="vendorImage" alt="7-Eleven">
+            <img *ngIf="transaction.merchant.name==='H&M Online Store'" src="./../../assets/icons/h&m-online-store.png"
+              class="vendorImage" alt="H&M">
+            <img *ngIf="transaction.merchant.name==='Amazon Online Store'"
+              src="./../../assets/icons/amazon-online-store.png" class="vendorImage" alt="Amazon">
+            <img *ngIf="transaction.merchant.name==='Jerry Hildreth'" src="./../../assets/icons/jerry-hildreth.png"
+              class="vendorImage" alt="Jerry Hildreth">
+            <img *ngIf="transaction.merchant.name==='Lawrence Pearson'" src="./../../assets/icons/lawrence-pearson.png"
+              class="vendorImage" alt="Lawrence Pearso">
+            <img *ngIf="transaction.merchant.name==='Southern Electric Company'"
+              src="./../../assets/icons/southern-electric-company.png" class="vendorImage"
+              alt="Southern Electric Company">
+            <img *ngIf="transaction.merchant.name==='Texaco'" src="./../../assets/icons/texaco.png" class="vendorImage"
+              alt="Texaco">
+            <img *ngIf="transaction.merchant.name==='The Tea Lounge'" src="./../../assets/icons/the-tea-lounge.png"
+              class="vendorImage" alt="The Tea Lounge">
+            <img *ngIf="transaction.merchant.name==='Whole Foods'" src="./../../assets/icons/whole-foods.png"
+              class="vendorImage" alt="Whole Foods">
+          </div>
+          <div class="col-6">
+            {{transaction.merchant.name }}
+          </div>
+          <div class="col-2">
+            -${{transaction.transaction.amountCurrency.amount }}
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
