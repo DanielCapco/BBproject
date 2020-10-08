@@ -17,7 +17,7 @@
         <div class="form-group">
           <label for="merchantName">RECIPIENT NAME</label>
           <input type="text" class="form-control appInput" name="merchantName" id="merchantName" [(ngModel)]="formDataValues.merchantName" required #merchantName="ngModel">
-          <div *ngIf="merchantName.invalid && (merchantName.dirty || merchantName.touched)" class="overdraftWarning">
+          <div *ngIf="(merchantName.invalid && (merchantName.dirty || merchantName.touched || isSubmitClicked))" class="overdraftWarning">
             <small *ngIf="merchantName.errors.required">
               Recipient name is required.
             </small>
@@ -27,7 +27,7 @@
         <div class="form-group">
           <label for="toAccount">TO ACCOUNT</label>
           <input type="text" class="form-control appInput" name="toAccount" id="toAccount" [(ngModel)]="formDataValues.toAccount" required iban="toAccount" #toAccount="ngModel">
-          <div *ngIf="toAccount.invalid && (toAccount.dirty || toAccount.touched)" class="overdraftWarning">
+          <div *ngIf="(toAccount.invalid && (toAccount.dirty || toAccount.touched || isSubmitClicked))" class="overdraftWarning">
             <small *ngIf="toAccount.errors.required">
               Account number is required.
             </small>
@@ -46,9 +46,9 @@
             placeholder="$ 0.00"
             [(ngModel)]="formDataValues.amount"
             required
-            maxValue="{{accountAmount + 500}}"
+            amountMaxValue="{{accountAmount + 500}}"
             #amount="ngModel">
-          <div *ngIf="amount.invalid && (amount.dirty || amount.touched)" class="overdraftWarning">
+          <div *ngIf="(amount.invalid && (amount.dirty || amount.touched || isSubmitClicked))" class="overdraftWarning">
             <small *ngIf="amount.errors.required">
               Amount is required.
             </small>
@@ -62,7 +62,7 @@
         </div>
 
         <div class="text-right">
-          <button type="submit" class="btn submit-btn" [disabled]="!transferForm.form.valid">SUBMIT</button>
+          <button type="submit" class="btn submit-btn">SUBMIT</button>
         </div>
 
       </form>
@@ -74,7 +74,7 @@
         <p>Account number: {{formDataValues.toAccount}}</p>
       </div>
       <div class="text-right">
-        <button type="button" class="btn submit-btn" (click)="onTransfer()">TRANSFER</button>
+        <button type="button" class="btn submit-btn" (click)="onTransfer(transferForm)">TRANSFER</button>
       </div>
     </div>
   </div>
