@@ -1,5 +1,6 @@
 import { TransactionsService } from './../services/transactions.service';
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-transfer',
@@ -11,7 +12,6 @@ export class TransferComponent {
   currentStep = 'form';
   formDataValues = null;
   accountAmount = 5000;
-  // isOverdraftBeyonded = false;
   isAmounToLow = false;
   isSubmitClicked = false;
 
@@ -19,24 +19,32 @@ export class TransferComponent {
     private transactionsService : TransactionsService
   ) { }
 
+  ngOnInit() {
+    this.formDataValues = {
+      "amount": null,
+      "merchantName": "",
+      "toAccount": ""
+    }
+  }
+
   onSubmit(formData) {
     this.isSubmitClicked = true;
+    console.log(formData.value);
     this.formDataValues = formData.value;
-    // console.log(formData);
-    
-    // if(formData.amount <= 0) {
-    //   this.isAmounToLow = true;
-    //   return;
-    // } 
-    // if(this.accountAmount - formData.amount < -500) {
-    //   this.isOverdraftBeyonded = true;
-    //   return;
-    // }
     if(!formData.valid) {
       return;
     }
     this.currentStep = 'preview';  
   }
+  
+  resetForm() {
+    this.formDataValues = {
+      "amount": null,
+      "merchantName": "",
+      "toAccount": ""
+    }
+  }
+  
   onTransfer() {
     const transaction = {
       "categoryCode": "",
@@ -58,6 +66,7 @@ export class TransferComponent {
     };
     this.transactionsService.addTransaction(transaction)
     this.accountAmount -= this.formDataValues.amount;
+    this.resetForm();
     this.currentStep = 'form'
   }
 

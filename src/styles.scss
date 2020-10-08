@@ -20,6 +20,9 @@ body {
   box-shadow: none;
   border-color: lightcoral;
 }
+.appCardTranferHistoryAmount{
+  text-align: right;
+}
 .mainbar {
   padding: 15px 0px;
   border-bottom: orange 3px solid;
@@ -38,9 +41,14 @@ body {
   background-color: #0C8397;
   padding: 10px;
 }
-.appCardTitleBackground {
+.appCardTitleTransferImage {
   margin-left: 4px;
   background-image: url('./assets/icons/arrows.png');
+  background-repeat: no-repeat;
+}
+.appCardTitleTransferHistoryImage {
+  margin-left: 4px;
+  background-image: url('./assets/icons/briefcase.png');
   background-repeat: no-repeat;
 }
 .appCardBody {

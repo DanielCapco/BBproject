@@ -1,6 +1,6 @@
 <div class="appCard">
   <div class="appCardTitle">
-    <div class="appCardTitleBackground">
+    <div class="appCardTitleTransferImage">
       Make a Transfer
     </div>
   </div>
@@ -16,8 +16,8 @@
     
         <div class="form-group">
           <label for="merchantName">RECIPIENT NAME</label>
-          <input type="text" class="form-control appInput" name="merchantName" id="merchantName" ngModel required #merchantName="ngModel">
-          <div *ngIf="isSubmitClicked || (merchantName.invalid && (merchantName.dirty || merchantName.touched))" class="overdraftWarning">
+          <input type="text" class="form-control appInput" name="merchantName" id="merchantName" [(ngModel)]="formDataValues.merchantName" required #merchantName="ngModel">
+          <div *ngIf="merchantName.invalid && (merchantName.dirty || merchantName.touched)" class="overdraftWarning">
             <small *ngIf="merchantName.errors.required">
               Recipient name is required.
             </small>
@@ -26,8 +26,8 @@
     
         <div class="form-group">
           <label for="toAccount">TO ACCOUNT</label>
-          <input type="text" class="form-control appInput" name="toAccount" id="toAccount" ngModel required iban="toAccount" #toAccount="ngModel">
-          <div *ngIf="isSubmitClicked || (toAccount.invalid && (toAccount.dirty || toAccount.touched))" class="overdraftWarning">
+          <input type="text" class="form-control appInput" name="toAccount" id="toAccount" [(ngModel)]="formDataValues.toAccount" required iban="toAccount" #toAccount="ngModel">
+          <div *ngIf="toAccount.invalid && (toAccount.dirty || toAccount.touched)" class="overdraftWarning">
             <small *ngIf="toAccount.errors.required">
               Account number is required.
             </small>
@@ -44,11 +44,11 @@
             name="amount" 
             id="amount"
             placeholder="$ 0.00"
-            ngModel
+            [(ngModel)]="formDataValues.amount"
             required
             maxValue="{{accountAmount + 500}}"
             #amount="ngModel">
-          <div *ngIf="isSubmitClicked || (amount.invalid && (amount.dirty || amount.touched))" class="overdraftWarning">
+          <div *ngIf="amount.invalid && (amount.dirty || amount.touched)" class="overdraftWarning">
             <small *ngIf="amount.errors.required">
               Amount is required.
             </small>
@@ -69,7 +69,7 @@
     </div>
     <div *ngIf="currentStep==='preview'">
       <div class="form-group">
-        <p>You will transfer ${{formDataValues.amount}}</p>
+        <p>You will transfer ${{formDataValues.amount}}.</p>
         <p>Recipient: {{formDataValues.merchantName}}</p>
         <p>Account number: {{formDataValues.toAccount}}</p>
       </div>

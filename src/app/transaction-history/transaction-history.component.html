@@ -1,6 +1,6 @@
 <div class="appCard">
   <div class="appCardTitle">
-    <div class="appCardTitleBackground">
+    <div class="appCardTitleTransferHistoryImage">
       Recent transactions
     </div>
   </div>
@@ -81,11 +81,11 @@
             <img *ngIf="transaction.merchant.name==='Whole Foods'" src="./../../assets/icons/whole-foods.png"
               class="vendorImage" alt="Whole Foods">
           </div>
-          <div class="col-6">
+          <div class="col-5">
             {{transaction.merchant.name }}
           </div>
-          <div class="col-2">
-            -${{transaction.transaction.amountCurrency.amount }}
+          <div class="col-3 appCardTranferHistoryAmount">
+            -{{transaction.transaction.amountCurrency.amount | currency:'CAD':'symbol-narrow':'1.2-2'}}
           </div>
         </div>
       </li>
