@@ -1,5 +1,5 @@
 import { IbanValidator } from './transfer/ibanValidator.directive';
-import { MaxAmountValidator } from './transfer/maxAmountValidator.directive';
+import { AmountValidator } from './transfer/amountValidator.directive';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -17,7 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppComponent,
     TransferComponent,
     TransactionHistoryComponent,
-    MaxAmountValidator,
+    AmountValidator,
     IbanValidator
   ],
   imports: [
@@ -26,7 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     FormsModule,
     Ng2SearchPipeModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
