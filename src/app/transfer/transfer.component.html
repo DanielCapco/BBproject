@@ -10,7 +10,7 @@
 
         <div class="form-group">
           <label for="fromAccount">FROM ACCOUNT</label>
-          <input type="text" class="form-control appInput" name="fromAccount" placeholder="Free Checking(4692): ${{accountAmount}}" ngModel
+          <input type="text" class="form-control appInput" name="fromAccount" placeholder="Free Checking(4692): {{accountAmount | currency:'CAD':'symbol-narrow':'1.2-2'}}" ngModel
             disabled>
         </div>
     
@@ -69,7 +69,7 @@
     </div>
     <div *ngIf="currentStep==='preview'">
       <div class="form-group">
-        <p>You will transfer ${{formDataValues.amount}}.</p>
+        <p>You will transfer {{formDataValues.amount | currency:'CAD':'symbol-narrow':'1.2-2'}}.</p>
         <p>Recipient: {{formDataValues.merchantName}}</p>
         <p>Account number: {{formDataValues.toAccount}}</p>
       </div>
