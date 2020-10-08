@@ -20,6 +20,7 @@ RWD for web
 
 ## Project structure
 
+```bash
 .
 ├── dist                                    # Compiled files
 ├── src                                     # Source files
@@ -29,3 +30,4 @@ RWD for web
 |   |   └── transfer                        
 |   └── assets                              # Assets
 └── README.md
+```
