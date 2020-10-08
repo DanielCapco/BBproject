@@ -9,7 +9,7 @@ import {
 import { Directive } from '@angular/core';
 
 // validation function
-function validateMaxValue(): ValidatorFn {
+function validateIban(): ValidatorFn {
   return (c: AbstractControl) => {
     if (!IBAN.isValid(c.value)) {
       return { ibanValid: true };
@@ -28,7 +28,7 @@ export class IbanValidator implements Validator {
   validator: ValidatorFn;
 
   ngOnInit() {
-    this.validator = validateMaxValue();
+    this.validator = validateIban();
   }
 
   validate(c: FormControl) {

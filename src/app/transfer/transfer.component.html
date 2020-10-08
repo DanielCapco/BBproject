@@ -47,9 +47,7 @@
             [(ngModel)]="formDataValues.amount"
             required
             amountMaxValue="{{accountAmount + 500}}"
-            #amount="ngModel"
-            (blur)="format(formDataValues.amount)"
-            (focus)="remove(formDataValues.amount)">
+            #amount="ngModel">
           <div *ngIf="(amount.invalid && (amount.dirty || amount.touched || isSubmitClicked))" class="overdraftWarning">
             <small *ngIf="amount.errors.required">
               Amount is required.
@@ -58,7 +56,7 @@
               Insufficient founds.
             </small>
             <small *ngIf="amount.errors.minValue">
-              Amount is to low.
+              Amount can not be negative.
             </small>
           </div>
         </div>
