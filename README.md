@@ -14,8 +14,9 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 Framework: Angular 10
 Search filter: Ng2SearchPipe
-
-
+Form validator (amount + IBAN)
+Currency formatting
+RWD for web
 
 ## Project structure
 

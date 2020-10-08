@@ -39,6 +39,20 @@ export class TransferComponent {
     this.isSubmitClicked = false;
   }
 
+  format(amt){
+    if(amt !== null && amt % 1 === 0){
+      amt = amt + '.00';
+      this.formDataValues.amount = amt;
+    }
+  }
+
+  remove(amt){
+    if(amt !== null && amt % 1 === 0){
+      console.log('remove', amt)
+
+      this.formDataValues.amount = amt * 1;
+    }
+  }
   onTransfer() {
     const transaction = {
       "categoryCode": "#cccccc",
