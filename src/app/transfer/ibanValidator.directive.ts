@@ -1,31 +1,37 @@
 import IBAN from 'iban';
-import { AbstractControl, ValidatorFn, NG_VALIDATORS, Validator, FormControl } from '@angular/forms';
+import {
+  AbstractControl,
+  ValidatorFn,
+  NG_VALIDATORS,
+  Validator,
+  FormControl,
+} from '@angular/forms';
 import { Directive } from '@angular/core';
 
 // validation function
 function validateMaxValue(): ValidatorFn {
-    return (c: AbstractControl) => {
-        if(!IBAN.isValid(c.value)) {
-          return {ibanValid: true};
-        }
-        return null;
+  return (c: AbstractControl) => {
+    if (!IBAN.isValid(c.value)) {
+      return { ibanValid: true };
     }
+    return null;
+  };
 }
 
 @Directive({
-    selector: '[iban][ngModel]',
-    providers: [
-        { provide: NG_VALIDATORS, useExisting: IbanValidator, multi: true }
-    ]
+  selector: '[iban][ngModel]',
+  providers: [
+    { provide: NG_VALIDATORS, useExisting: IbanValidator, multi: true },
+  ],
 })
 export class IbanValidator implements Validator {
-    validator: ValidatorFn;
+  validator: ValidatorFn;
 
-    ngOnInit() {
-        this.validator = validateMaxValue();
-    }
+  ngOnInit() {
+    this.validator = validateMaxValue();
+  }
 
-    validate(c: FormControl) {
-        return this.validator(c);
-    }
+  validate(c: FormControl) {
+    return this.validator(c);
+  }
 }
